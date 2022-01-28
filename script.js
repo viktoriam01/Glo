@@ -7,3 +7,5 @@ let rollback;
 let fullPrice;
 let adaptive;
 
+alert('Hello')
+console.log('Hello, world!');
