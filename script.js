@@ -1,5 +1,7 @@
 'use strict';
 
+// >>>>>>>>>>>>>>>>>  ОБЬЯВЛЕНИЕ ПЕРЕМЕННЫХ  <<<<<<<<<<<<<<<<<<<<<
+
 let title = prompt("Как называется ваш проект?");
 let screens = prompt("Какие типы экранов нужно разработать?");
 let screenPrice = +prompt("Сколько будет стоить данная работа?");
@@ -9,27 +11,61 @@ let service1 = prompt("Какой дополнительный тип услуг
 let servicePrice1 = +prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = +prompt("Сколько это будет стоить?");
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let servicePercentPrice = Math.ceil(fullPrice - rollback);
+let fullPrice;
+let allServicePrices;
+let servicePercentPrice;
 
 
+// >>>>>>>>>>>>>>>>>>>  ОБЪЯВЛЕНИЕ ФУНКЦИЙ  <<<<<<<<<<<<<<<<<<<<<<<<<<
 
-function showDiscount() {
-   if (fullPrice >= 30000) {
-      console.log('Даем скидку в 10%')
-   } else if (fullPrice >= 15000 && fullPrice < 30000){
-      console.log('Даем скидку в 5%')
-   } else if (fullPrice >= 0 && fullPrice < 15000){
-      console.log('Скидка не предусмотрена')
-   } else if (fullPrice < 0) {
-   console.log('Что то пошло не так')
+const showTypeOf = function (variable) {
+   console.log(variable, typeof variable);
+}
+
+const getRollbackMessage = function(price) {
+   if (price >= 30000) {
+      return 'Даем скидку в 10%'
+   } else if (price >= 15000 && fullPrice < 30000){
+      return 'Даем скидку в 5%'
+   } else if (price >= 0 && fullPrice < 15000){
+      return 'Скидка не предусмотрена'
+   } else if (price < 0) {
+   return 'Что то пошло не так'
 }
 }
 
-showDiscount()
+let getAllServicePrices = function () {
+    return servicePrice1 + servicePrice2;
+ }
 
+function getFullPrice() {
+   return screenPrice + allServicePrices;
+}
 
-console.log(fullPrice)
+function getTitle() {
+   let title1 = title.trim()
+   console.log(title1[0].toUpperCase() + title1.substring(1).toLowerCase());
+}
+
+let getServicePercentPrices = function () {
+   return Math.ceil(fullPrice - (fullPrice * (rollback/100)));
+}
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>  БЛОК ФУНКЦИОНАЛА, ВЫЧИСЛЕНИЯ  <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+showTypeOf(title)
+showTypeOf(screenPrice)
+showTypeOf(adaptive)
+getFullPrice()
+allServicePrices = getAllServicePrices()
+fullPrice = getFullPrice()
+getTitle()
+servicePercentPrice = getServicePercentPrices()
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>  БЛОК ЛОГОВ, МУСОРНЫЙ БЛОК <<<<<<<<<<<<<<<<<<<<<<<<
+
+console.log(getRollbackMessage(fullPrice));
+console.log(fullPrice);
 console.log(servicePercentPrice);
 console.log(typeof title);
 console.log(typeof fullPrice);
