@@ -34,7 +34,7 @@ const getRollbackMessage = function(price) {
 }
 }
 
-let getAllServicePrices = function () {
+const getAllServicePrices = function () {
     return servicePrice1 + servicePrice2;
  }
 
@@ -44,23 +44,24 @@ function getFullPrice() {
 
 function getTitle() {
    let title1 = title.trim()
-   console.log(title1[0].toUpperCase() + title1.substring(1).toLowerCase());
+   return title1[0].toUpperCase() + title1.substring(1).toLowerCase();
 }
 
-let getServicePercentPrices = function () {
+const getServicePercentPrices = function () {
    return Math.ceil(fullPrice - (fullPrice * (rollback/100)));
 }
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>  БЛОК ФУНКЦИОНАЛА, ВЫЧИСЛЕНИЯ  <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+allServicePrices = getAllServicePrices()
+fullPrice = getFullPrice()
+title = getTitle()
+servicePercentPrice = getServicePercentPrices()
+
 showTypeOf(title)
 showTypeOf(screenPrice)
 showTypeOf(adaptive)
-getFullPrice()
-allServicePrices = getAllServicePrices()
-fullPrice = getFullPrice()
-getTitle()
-servicePercentPrice = getServicePercentPrices()
+// getFullPrice()
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>  БЛОК ЛОГОВ, МУСОРНЫЙ БЛОК <<<<<<<<<<<<<<<<<<<<<<<<
 
