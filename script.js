@@ -64,13 +64,6 @@ servicePercentPrice = getServicePercentPrices()
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>  БЛОК ЛОГОВ, МУСОРНЫЙ БЛОК <<<<<<<<<<<<<<<<<<<<<<<<
 
+console.log('Тип экранов для разработки: ' + screens);
 console.log(getRollbackMessage(fullPrice));
-console.log(fullPrice);
-console.log(servicePercentPrice);
-console.log(typeof title);
-console.log(typeof fullPrice);
-console.log(typeof adaptive);
-console.log(screens.length);
-console.log(`Стоимость верстки экранов ${screenPrice} рублей\nСтоимость разработки сайта ${fullPrice} рублей`);
-console.log(screens.toLowerCase().split(", "));
-console.log(fullPrice * (rollback/100));
+console.log('Cтоимость за вычетом процента отката посреднику: ' + servicePercentPrice);
