@@ -104,7 +104,7 @@ const appData = {
       appData.fullPrice = appData.getFullPrice()
       appData.getServicePercentPrices()
       appData.servicePercentPrices = appData.getServicePercentPrices()
-      appData.getRollbackMessage()
+      appData.getRollbackMessage(appData.fullPrice)
       appData.logger()
 
 
@@ -112,7 +112,7 @@ const appData = {
       console.log(appData.getAllServicePrices());      
       console.log(appData.getFullPrice());      
       console.log(appData.getServicePercentPrices());
-      console.log(appData.getRollbackMessage());
+      console.log(appData.getRollbackMessage(appData.fullPrice));
       
       
    },
