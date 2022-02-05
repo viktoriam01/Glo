@@ -94,26 +94,22 @@ const appData = {
    // >>>>>>>>>>>>>>>>>>>>>> ВЫЧИСЛЕНИЯ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
    // Метод, который запускает все скрипты
- start: function() {
+   start: function() {
      
       appData.asking();
-      appData.getTitle()
-      appData.getAllServicePrices()
-      appData.allServicePrices = appData.getAllServicePrices()
-      appData.getFullPrice()
-      appData.fullPrice = appData.getFullPrice()
-      appData.getServicePercentPrices()
-      appData.servicePercentPrices = appData.getServicePercentPrices()
-      appData.getRollbackMessage(appData.fullPrice)
-      appData.logger()
+      appData.getTitle();
+      appData.allServicePrices = appData.getAllServicePrices();
+      appData.fullPrice = appData.getFullPrice();      
+      appData.servicePercentPrices = appData.getServicePercentPrices();
+      appData.getRollbackMessage(appData.fullPrice);
+      appData.logger();
 
 
       console.log(appData.getTitle());      
-      console.log(appData.getAllServicePrices());      
+      console.log(appData.getAllServicePrices);      
       console.log(appData.getFullPrice());      
       console.log(appData.getServicePercentPrices());
       console.log(appData.getRollbackMessage(appData.fullPrice));
-      
       
    },
   
