@@ -26,7 +26,7 @@ const appData = {
       }  while( +appData.title === Number(appData.title));
 
       for (let i = 0; i < 2; i++) {
-         let name = prompt("Какие типы экранов нужно разработать?");
+         let name 
          do {
             name = prompt("Какие типы экранов нужно разработать?")
          } while (+name === Number(name))
@@ -43,7 +43,7 @@ const appData = {
       }
 
       for (let i = 0; i < 2; i++) {
-         let name = prompt('Какой дополнительный тип услуги нужен?');
+         let name 
          let price = 0;
 
          do {
