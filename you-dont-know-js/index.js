@@ -43,9 +43,10 @@ titles[6].after(titles[8]);
 const list2 = book6.querySelector('ul');
 const titles2 = list2.querySelectorAll('li');
 
+
 titles2[4].after(titles2[2]);
 titles2[1].after(titles2[9]);
-
+titles2[7].after(titles2[5]);
 
 // Добавление главы в 6 книге
 
