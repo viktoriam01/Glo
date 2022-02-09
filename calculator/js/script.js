@@ -1,18 +1,19 @@
 'use strict';
-const title = document.getElementsByTagName('h1')
-      title[0]
+const title = document.getElementsByTagName('h1')[0]
 const buttons = document.getElementsByClassName('handler_btn')
+const buttonStart = buttons[0];
+const buttonReset = buttons[1];
 const plus = document.querySelector('.screen-btn')
 const percent = document.querySelectorAll('.other-items.percent')
 const number = document.querySelectorAll('.other-items.number')
 const range = document.querySelector('div > div > input[type=range]')
 const span = document.querySelector('div > div > span')
 const inputs = document.getElementsByClassName('total-input')
-      inputs[0]
-      inputs[1]
-      inputs[2]
-      inputs[3]
-      inputs[4]
+const inputTotal = inputs[0];
+const inputCount = inputs[1]
+const inputCountOther = inputs[2]
+const inputFullCount = inputs[3]
+const inputRollback = inputs[4]
 
 let screen = document.querySelectorAll('.screen')
 
