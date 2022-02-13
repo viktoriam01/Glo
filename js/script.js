@@ -5,9 +5,7 @@ const otherItemPercent = document.querySelectorAll('.other-items.percent')
 const otherItemNumber = document.querySelectorAll('.other-items.number')
 
 const inputRange = document.querySelector('div > div > input[type=range]')
-console.log(inputRange);
 const inputRangeValue = document.querySelector(".range-value")
-console.log(inputRangeValue);
 
 const buttons = document.getElementsByClassName('handler_btn')
 const startButton = buttons[0];
@@ -29,6 +27,7 @@ const appData = {
    title: '',
    screens: [],
    screenPrice: 0, 
+   screensCount: 0,
    rollback: 0,
    adaptive: true, 
    servicePricesPersent: 0,
@@ -65,11 +64,9 @@ const appData = {
             id: index, 
             name: selectName, 
             price: +select.value * +input.value,
-            count: +input.value
-         })
+            count: +input.value,
+         })        
       })
-      console.log(appData.screens);
-      // console.log(appData.screens.price);
    },
 
    addScreenBlock: function(){
@@ -108,73 +105,66 @@ const appData = {
    },
 
    start: function() {
+      // if () {
+      //    event.preventDefault()
+      // }
+
       appData.addScreens()
       appData.addServices()
-      
       appData.addPrices();
       
-          
-      
-      // appData.getRollbackMessage(appData.fullPrice);
       // appData.logger();
       appData.showResult()
       console.log(appData);
+      
    },
 
    showResult: function() {
       total.value = appData.screenPrice
+      totalCount.value = appData.screensCount
       totalCountOther.value = appData.servicePricesPersent + appData.servicePricesNumber
       fullTotalCount.value = appData.fullPrice
       totalCountRollback.value = appData.servicePercentPrices
-      // totalCount.value = appData.screens.count
    },
 
 
    addPrices: function() {
        for (let screen of appData.screens) {
-            appData.screenPrice += +screen.price
+            appData.screenPrice += +screen.price;
       }
 
-       for (let key in appData.servicesNumber) {
+      for (let screen of appData.screens) {
+         appData.screensCount += +screen.count; 
+          console.log( 'TEST: ', appData.screensCount, screen.count );
+      }
+         
+      for (let key in appData.servicesNumber) {
          appData.servicePricesNumber += appData.servicesNumber[key]
-      }   
+      };   
      
       for (let key in appData.servicesPercent) {
                appData.servicePricesPersent += appData.screenPrice * (appData.servicesPercent[key]/100)
-            }   
+            };   
 
-      appData.fullPrice = +appData.screenPrice + appData.servicePricesPersent + appData.servicePricesNumber 
+      appData.fullPrice = +appData.screenPrice + appData.servicePricesPersent + appData.servicePricesNumber; 
 
       appData.servicePercentPrices = Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
 
-      // appData.screens.count += appData.screens.count      
+     
    }, 
    
-   getRollbackMessage: function(price) {
-
-      if (price >= 30000) {
-         return 'Даем скидку в 10%'
-      } else if (price>= 15000 && price < 30000){
-         return 'Даем скидку в 5%'
-      } else if (price >= 0 && price < 15000){
-         return 'Скидка не предусмотрена'
-      } else if (price < 0) {
-      return 'Что то пошло не так'
-      }
-   },
- 
-    logger: function() {
-      console.log(appData.screens);
-      console.log(appData.services);
-      console.log(appData.fullPrice);
-      // console.log(appData.servicePercentPrices);
-      console.log(appData.getRollbackMessage(appData.fullPrice));
+   //  logger: function() {
+   //    console.log(appData.screens);
+   //    console.log(appData.services);
+   //    console.log(appData.fullPrice);
+   //    // console.log(appData.servicePercentPrices);
+   //    console.log(appData.getRollbackMessage(appData.fullPrice));
 
 
-      for (let key in appData) {
-         console.log('Ключ: ' + key + " " + "Значение: " + appData[key]);
-      }
-   },
+   //    for (let key in appData) {
+   //       console.log('Ключ: ' + key + " " + "Значение: " + appData[key]);
+   //    }
+   // },
 
 }
 
