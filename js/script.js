@@ -51,6 +51,30 @@ const appData = {
       document.title = title.textContent;
    },
 
+    start: function() {
+     
+     appData.addScreens()
+      
+     if (appData.screens.find(item => item.price === 0)) {
+     return } else {
+    
+      appData.addServices();
+      appData.addPrices();
+      appData.showResult();
+      // console.log(appData);
+      // appData.logger();
+     }    
+          
+   },
+   
+   showResult: function() {
+      total.value = appData.screenPrice
+      totalCount.value = appData.screensCount
+      totalCountOther.value = appData.servicePricesPersent + appData.servicePricesNumber
+      fullTotalCount.value = appData.fullPrice
+      totalCountRollback.value = appData.servicePercentPrices
+   },
+
    addScreens: function() {
       appData.screens.length = 0
       screens = document.querySelectorAll('.screen')
@@ -77,7 +101,7 @@ const appData = {
    // Откат посреднику
 
    getRollback: function(e) {
-      inputRangeValue.textContent = e.target.value;
+      inputRangeValue.textContent = e.target.value
       appData.rollback = e.target.value
    },
 
@@ -103,30 +127,6 @@ const appData = {
          }
       })  
    },
-
-   start: function() {
-      // if () {
-      //    event.preventDefault()
-      // }
-
-      appData.addScreens()
-      appData.addServices()
-      appData.addPrices();
-      
-      // appData.logger();
-      appData.showResult()
-      console.log(appData);
-      
-   },
-
-   showResult: function() {
-      total.value = appData.screenPrice
-      totalCount.value = appData.screensCount
-      totalCountOther.value = appData.servicePricesPersent + appData.servicePricesNumber
-      fullTotalCount.value = appData.fullPrice
-      totalCountRollback.value = appData.servicePercentPrices
-   },
-
 
    addPrices: function() {
        for (let screen of appData.screens) {
@@ -171,8 +171,3 @@ const appData = {
 // >>>>>>>>>>>>>>>>>>>>>>>>>  ЗАПУСК  <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 appData.init()
-
-
-
-
-
