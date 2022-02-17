@@ -18,9 +18,9 @@ const totalCountOther = inputs[2]
 const fullTotalCount = inputs[3]
 const totalCountRollback = inputs[4]
 
-let screens = document.querySelectorAll('.screen')
+let screens = document.querySelectorAll('.screen') 
 
-
+const screensDef = screens[0].cloneNode(true)
 
 const appData = {
    
@@ -42,9 +42,10 @@ const appData = {
       appData.start()
 
       startButton.addEventListener('click', appData.start)
+      
       buttonPlus.addEventListener('click', appData.addScreenBlock)
       inputRange.addEventListener('input', appData.getRollback)
-      inputRange.addEventListener('change', appData.getRollback)
+      
    },
 
    addTitle: function() {
@@ -77,8 +78,7 @@ const appData = {
 
    addScreens: function() {
       appData.screens.length = 0
-      screens = document.querySelectorAll('.screen')
-
+      
       screens.forEach(function(screen, index) {
          const select = screen.querySelector('select');
          const input = screen.querySelector('input');
@@ -89,19 +89,28 @@ const appData = {
             name: selectName, 
             price: +select.value * +input.value,
             count: +input.value,
-         })        
+         })     
+        
       })
+     
    },
 
    addScreenBlock: function(){
-     const cloneScreen = screens[0].cloneNode(true)
-     screens[screens.length - 1].after(cloneScreen)
-   },
+      // вариант Вадима
+      // const cloneScreen = screens[0].cloneNode(true)
+      // const input = cloneScreen.querySelector('input');
+      // input.value = 0
 
+     // вариант Кирилла
+     const cloneScreen = screensDef.cloneNode(true);
+     screens[screens.length-1].after(cloneScreen);
+     screens = document.querySelectorAll('.screen');        
+   },
+   
    // Откат посреднику
 
    getRollback: function(e) {
-      inputRangeValue.textContent = e.target.value
+      inputRangeValue.textContent = e.target.value +'%'
       appData.rollback = e.target.value
    },
 
