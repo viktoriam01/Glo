@@ -38,13 +38,13 @@ const appData = {
    servicesNumber: {},
 
    init: function() {
-      appData.addTitle()
-      appData.start()
+      this.addTitle()
+      this.start()
 
-      startButton.addEventListener('click', appData.start)
-      
-      buttonPlus.addEventListener('click', appData.addScreenBlock)
-      inputRange.addEventListener('input', appData.getRollback)
+      // Привязка контекста через метод функции bind  и вариант через стрелочную функцию, которая не имеет своего контекста
+      startButton.addEventListener('click',this.start.bind(this))
+      buttonPlus.addEventListener('click', this.addScreenBlock.bind(this))
+      inputRange.addEventListener('input', (event) => this.getRollback(event))
       
    },
 
@@ -52,39 +52,38 @@ const appData = {
       document.title = title.textContent;
    },
 
-    start: function() {
+   start: function() {
      
-     appData.addScreens()
+     this.addScreens()
       
-     if (appData.screens.find(item => item.price === 0)) {
+     if (this.screens.find(item => item.price === 0)) {
      return } else {
     
-      appData.addServices();
-      appData.addPrices();
-      appData.showResult();
+      this.addServices();
+      this.addPrices();
+      this.showResult();
       // console.log(appData);
-      // appData.logger();
-     }    
+      }    
           
    },
    
    showResult: function() {
-      total.value = appData.screenPrice
-      totalCount.value = appData.screensCount
-      totalCountOther.value = appData.servicePricesPersent + appData.servicePricesNumber
-      fullTotalCount.value = appData.fullPrice
-      totalCountRollback.value = appData.servicePercentPrices
+      total.value = this.screenPrice
+      totalCount.value = this.screensCount
+      totalCountOther.value = this.servicePricesPersent + appData.servicePricesNumber
+      fullTotalCount.value = this.fullPrice
+      totalCountRollback.value = this.servicePercentPrices
    },
 
    addScreens: function() {
-      appData.screens.length = 0
+      this.screens.length = 0
       
-      screens.forEach(function(screen, index) {
+      screens.forEach((screen, index) => {
          const select = screen.querySelector('select');
          const input = screen.querySelector('input');
          const selectName = select.options[select.selectedIndex].textContent
         
-         appData.screens.push({
+         this.screens.push({
             id: index, 
             name: selectName, 
             price: +select.value * +input.value,
@@ -96,87 +95,62 @@ const appData = {
    },
 
    addScreenBlock: function(){
-      // вариант Вадима
-      // const cloneScreen = screens[0].cloneNode(true)
-      // const input = cloneScreen.querySelector('input');
-      // input.value = 0
-
-     // вариант Кирилла
      const cloneScreen = screensDef.cloneNode(true);
      screens[screens.length-1].after(cloneScreen);
      screens = document.querySelectorAll('.screen');        
    },
    
-   // Откат посреднику
-
    getRollback: function(e) {
       inputRangeValue.textContent = e.target.value +'%'
-      appData.rollback = e.target.value
+      this.rollback = e.target.value
    },
 
 
    addServices: function() {
-      otherItemPercent.forEach(function(item) {
+      otherItemPercent.forEach((item) => {
         const check = item.querySelector('input[type=checkbox]')
         const label = item.querySelector('label')
         const input = item.querySelector('input[type=text]')
 
          if(check.checked) {
-        appData.servicesPercent[label.textContent] = +input.value 
+        this.servicesPercent[label.textContent] = +input.value 
          }
       })
 
-      otherItemNumber.forEach(function(item) {
+      otherItemNumber.forEach((item) => {
         const check = item.querySelector('input[type=checkbox]')
         const label = item.querySelector('label')
         const input = item.querySelector('input[type=text]')
 
          if(check.checked) {
-        appData.servicesNumber[label.textContent] = +input.value 
+        this.servicesNumber[label.textContent] = +input.value 
          }
       })  
    },
 
    addPrices: function() {
-       for (let screen of appData.screens) {
-            appData.screenPrice += +screen.price;
+       for (let screen of this.screens) {
+            this.screenPrice += +screen.price;
       }
 
-      for (let screen of appData.screens) {
-         appData.screensCount += +screen.count; 
-          console.log( 'TEST: ', appData.screensCount, screen.count );
+      for (let screen of this.screens) {
+         this.screensCount += +screen.count; 
       }
          
-      for (let key in appData.servicesNumber) {
-         appData.servicePricesNumber += appData.servicesNumber[key]
+      for (let key in this.servicesNumber) {
+         this.servicePricesNumber += this.servicesNumber[key]
       };   
      
-      for (let key in appData.servicesPercent) {
-               appData.servicePricesPersent += appData.screenPrice * (appData.servicesPercent[key]/100)
+      for (let key in this.servicesPercent) {
+               this.servicePricesPersent += this.screenPrice * (this.servicesPercent[key]/100)
             };   
 
-      appData.fullPrice = +appData.screenPrice + appData.servicePricesPersent + appData.servicePricesNumber; 
+      this.fullPrice = +this.screenPrice + this.servicePricesPersent + this.servicePricesNumber; 
 
-      appData.servicePercentPrices = Math.ceil(appData.fullPrice - (appData.fullPrice * (appData.rollback/100)));
-
-     
+      this.servicePercentPrices = Math.ceil(this.fullPrice - (this.fullPrice * (this.rollback/100)));
+     console.log(this.screenPrice, this.screensCount, this.servicePricesNumber, this.servicePricesPersent, this.fullPrice, this.servicePercentPrices);
    }, 
-   
-   //  logger: function() {
-   //    console.log(appData.screens);
-   //    console.log(appData.services);
-   //    console.log(appData.fullPrice);
-   //    // console.log(appData.servicePercentPrices);
-   //    console.log(appData.getRollbackMessage(appData.fullPrice));
-
-
-   //    for (let key in appData) {
-   //       console.log('Ключ: ' + key + " " + "Значение: " + appData[key]);
-   //    }
-   // },
-
+    
 }
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>  ЗАПУСК  <<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 appData.init()
